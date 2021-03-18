@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/record"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="记录"
+        android:gravity="center"
+        android:background="#aaccff"/>
+
+    <TextView
+        android:id="@+id/zip"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="压缩"
+        android:gravity="center"
+        android:background="#ccaaff"/>
+
+</LinearLayout>
