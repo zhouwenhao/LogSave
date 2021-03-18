@@ -54,7 +54,6 @@ LogSaveManager.getInstance().copy("", new ExtractCall() {
 设计思路：
 
 ```java
-业务无感知，插桩方式实现
 设计方案
              LogSaveManager  总入口
              WriteSync   写入锁
