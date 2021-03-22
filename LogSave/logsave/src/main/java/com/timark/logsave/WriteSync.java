@@ -113,10 +113,12 @@ class WriteSync {
                 synchronized (mFileSync){
                     mIsFileIng = true;
                     if (mIsNeedUpload){
-                        //进行上传
-                        doUploadLog(mUploadCall);
-                        //上传成功后
-                        mIsNeedUpload = false;
+                        synchronized (mUploadSync) {
+                            //进行上传
+                            doUploadLog(mUploadCall);
+                            //上传成功后
+                            mIsNeedUpload = false;
+                        }
                     }else if (mIsNeedCopy){
                         synchronized (mCopySync){
 //                            mCopyDestDirPath
