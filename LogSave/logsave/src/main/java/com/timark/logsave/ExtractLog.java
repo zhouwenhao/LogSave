@@ -55,7 +55,7 @@ class ExtractLog {
         }
         zip(dirPath, filePath);
         if (extractCall != null){
-            extractCall.zip(ExtractCall.TYPE_COPY, false, filePath);
+            extractCall.zip(ExtractCall.TYPE_COPY, true, filePath);
         }
     }
 
