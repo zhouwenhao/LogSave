@@ -43,11 +43,38 @@ public class LogSaveManager {
         init("");
     }
 
+    /**
+     *
+     * @param context
+     * @param dirPath 日志存储路径
+     */
     public void init(Context context, String dirPath){
         if (mAppContext != null){
             throw new RuntimeException("不支持重复init");
         }
         mAppContext = context.getApplicationContext();
+
+        init(dirPath);
+    }
+
+    /**
+     * 初始化
+     * @param context
+     * @param dirPath 日志存储路径
+     * @param maxRecordDayNum 最大记录多少天
+     * @param maxQueneSize 队列上限
+     * @param maxLogFileLine 单个log文件最多记录多少行
+     * @param zipPwd zip压缩包密码
+     */
+    public void init(Context context, String dirPath, int maxRecordDayNum, int maxQueneSize, int maxLogFileLine, String zipPwd){
+        if (mAppContext != null){
+            throw new RuntimeException("不支持重复init");
+        }
+        mAppContext = context.getApplicationContext();
+        LogConfig.mMaxRecordDayNum = maxRecordDayNum;
+        LogConfig.mMaxQueneSize = maxQueneSize;
+        LogConfig.mMaxLogFileLine = maxLogFileLine;
+        LogConfig.mZipPassword = zipPwd;
 
         init(dirPath);
     }

@@ -33,8 +33,6 @@ import java.util.List;
 class WriteLog {
     private final String DIR_PATH = "/log/";
     private String mSaveLogDir = null;
-    private static final int MAX_LOG_DIR_NUM = 5;
-    private static final int MAX_LOG_LINE = 10000;
 
     public WriteLog(Context applicationContext, String dirPath){
         if (TextUtils.isEmpty(dirPath)) {
@@ -84,7 +82,7 @@ class WriteLog {
             }catch (Exception e){
 
             }
-            if (line[0] >= MAX_LOG_LINE){
+            if (line[0] >= LogConfig.mMaxLogFileLine){
                 yhdStr = "";
             }
         }
@@ -106,8 +104,8 @@ class WriteLog {
     }
 
     private String createDayDir(long time){
-        List<String> dirNames = new ArrayList<>(MAX_LOG_DIR_NUM);
-        for (int i = 0; i < MAX_LOG_DIR_NUM; ++i){
+        List<String> dirNames = new ArrayList<>(LogConfig.mMaxRecordDayNum);
+        for (int i = 0; i < LogConfig.mMaxRecordDayNum; ++i){
             dirNames.add(new SimpleDateFormat("yyyy-MM-dd").format(new Date(time - i*(24 * 60 * 60 * 1000))));
         }
 
@@ -238,7 +236,7 @@ class WriteLog {
         }
 
         int cnt = getFileLineCounts(f);
-        if (cnt < MAX_LOG_LINE){
+        if (cnt < LogConfig.mMaxLogFileLine){
             line[0] = cnt;
             return false;
         }else {

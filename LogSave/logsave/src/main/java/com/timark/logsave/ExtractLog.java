@@ -67,7 +67,7 @@ class ExtractLog {
             file.delete();
         }
         try {
-            return ZipUtil.compressFolder(desFilePath, "测试密码", srcDirPath);
+            return ZipUtil.compressFolder(desFilePath, LogConfig.mZipPassword, srcDirPath);
         }catch (Exception e){
             Log.e("Log-upload", e.getMessage());
             return false;
