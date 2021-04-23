@@ -31,9 +31,9 @@ class ExtractLog {
         if (extractCall != null){
             extractCall.zip(ExtractCall.TYPE_UPLOAD, false, filePath);
         }
-        zip(dirPath, filePath);
+        boolean isSuc = zip(dirPath, filePath);
         if (extractCall != null){
-            extractCall.zip(ExtractCall.TYPE_UPLOAD, true, filePath);
+            extractCall.zip(ExtractCall.TYPE_UPLOAD, isSuc, filePath);
         }
     }
 
@@ -53,21 +53,24 @@ class ExtractLog {
         if (extractCall != null){
             extractCall.zip(ExtractCall.TYPE_COPY, false, filePath);
         }
-        zip(dirPath, filePath);
+        boolean isSuc = zip(dirPath, filePath);
         if (extractCall != null){
-            extractCall.zip(ExtractCall.TYPE_COPY, false, filePath);
+            extractCall.zip(ExtractCall.TYPE_COPY, isSuc, filePath);
         }
     }
 
-    private void zip(String srcDirPath, String desFilePath){
+    private boolean zip(String srcDirPath, String desFilePath){
+        Log.d("Log-upload", "src=" + srcDirPath);
+        Log.d("Log-upload", "des=" + desFilePath);
         File file = new File(desFilePath);
         if (file.exists()){
             file.delete();
         }
         try {
-            ZipUtil.zip(srcDirPath, desFilePath);
+            return ZipUtil.compressFolder(desFilePath, "测试密码", srcDirPath);
         }catch (Exception e){
             Log.e("Log-upload", e.getMessage());
+            return false;
         }
     }
 

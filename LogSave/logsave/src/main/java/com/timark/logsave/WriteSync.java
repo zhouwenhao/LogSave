@@ -9,6 +9,8 @@ import java.util.Queue;
 
 class WriteSync {
 
+    private final int QUENE_MAN_SIZE = 30000;
+
     private WriteLog mWriteLog;
     private ExtractLog mExtractLog;
 
@@ -67,7 +69,9 @@ class WriteSync {
     public void addLog(String type, String tag, String msg){
         LogObject logObject = new LogObject(type, tag, msg);
         synchronized (mAddSync){
-            mQuene.offer(logObject);
+            if (mQuene.size() < QUENE_MAN_SIZE) {
+                mQuene.offer(logObject);
+            }
         }
         if (!mIsFileIng){
             synchronized (mFileSync){

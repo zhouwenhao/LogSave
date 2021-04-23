@@ -18,7 +18,7 @@ public class LogSaveManager {
     private static final int JSON = 0x20;
     private static final int XML  = 0x30;
 
-    private static LogSaveManager mSelf;
+    private volatile static LogSaveManager mSelf;
     private Context mAppContext;
 
     private WriteSync mWriteSync;

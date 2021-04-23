@@ -80,7 +80,7 @@ class WriteLog {
             }
             line[0] ++;
             try {
-                writer.write((timeStr + "————>" + logObject.type + "————>" + logObject.tag + ":" + logObject.msg) + "\n");
+                writer.write((timeStr + "——>" + logObject.type + "——>" + "pid=" + logObject.pid + "——>" + logObject.tag + ":" + logObject.msg) + "\n");
             }catch (Exception e){
 
             }
@@ -202,10 +202,24 @@ class WriteLog {
             return null;
         }
         File curFile = null;
+        long fileNameLong = -1;
         for (File f : files){
-            if (!checkFileIsFull(f, line)){
+            String fileP = f.getName();
+            String fileName = fileP.substring(0, fileP.lastIndexOf("."));
+            long curFileNameLong = 0;
+            try {
+                curFileNameLong = Long.parseLong(fileName);
+            }catch (Exception e){
+
+            }
+            if (curFileNameLong > fileNameLong){
                 curFile = f;
-                break;
+                fileNameLong = curFileNameLong;
+            }
+        }
+        if (curFile != null) {
+            if (checkFileIsFull(curFile, line)) {
+                curFile = null;
             }
         }
         if (curFile != null){
